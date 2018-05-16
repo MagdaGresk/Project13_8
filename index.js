@@ -3,7 +3,8 @@ var server = http.createServer()
 var fs = require('fs')
 
 server.on('request', function (request, response) {
-	if (request.method === 'GET' && request.url === '/hello') {
+	response.setHeader("Content-Type", "text/html; charset=utf-8")
+	if (request.method === 'GET' && request.url === '/') {
 		fs.readFile('./index.html', function(err, data) {
 		    response.writeHead(200, {'Content-Type': 'text/html'})
 		    response.write(data)
@@ -11,7 +12,7 @@ server.on('request', function (request, response) {
 		})
 	} else {
 		fs.readFile('./cat.jpg', function(err, data) {
-			response.writeHead(404, {'Content-Type': 'image/jpg'})
+			response.writeHead(404, {'Content-Type': 'image/jpeg'})
 			response.write(data)
 		    response.end()
 		})
